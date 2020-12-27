@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Core.CrossCuting.Validation;
+using FluentValidation;
+using PostSharp.Aspects;
+
+namespace Core.Aspects.Postsharp.ValidationAspects
+{
+    [Serializable]
+    public class FluentValidationAspects:OnMethodBoundaryAspect
+    {
+        private Type _validatorType;
+
+        public FluentValidationAspects(Type validatorType)
+        {
+            _validatorType = validatorType;
+        }
+
+        public override void OnEntry(MethodExecutionArgs args)
+        {
+            var validator = (IValidator)Activator.CreateInstance(_validatorType);
+            var entityType = _validatorType.BaseType.GetGenericArguments()[0];
+            var entities = args.Arguments.Where(t => t.GetType() == entityType);
+            foreach (var item in entities)
+            {
+                ValidatorTool.FluentValidation(validator,item);
+            }
+        }
+    }
+}
