@@ -12,7 +12,12 @@ namespace Core.CrossCuting.Validation
             var result = validator.ValidateAsync((IValidationContext)entity);
             if (result.Result.Errors.Count>0)
             {
-                throw new ValidationException(result.Result.Errors);
+                foreach (var item in result.Result.Errors)
+                {
+                    throw new ValidationException("Property : "+item.PropertyName+
+                                                  " failed validation. \nError was : " +item.ErrorMessage+
+                                                  "\nError Code : "+item.ErrorCode);
+                }
             }
 
 
