@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class ProductBrandManager:GenericManager<ProductBrand>,IProductBrandService
+    public class ProductBrandManager:IProductBrandService
     {
         private IProductBrandDal _productBrandDal;
 
-        public ProductBrandManager(IProductBrandDal productBrandDal):base(productBrandDal)
+        public ProductBrandManager(IProductBrandDal productBrandDal)
         {
             _productBrandDal = productBrandDal;
         }

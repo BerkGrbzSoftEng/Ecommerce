@@ -64,6 +64,21 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
+        public async Task<bool> Delete(int Id)
+        {
+            using (var context=new TContext())
+            {
+                var obj = context.Set<TEntity>().Find(Id);
+                var result = context.Remove(obj);
+                if (await context.SaveChangesAsync()>0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         public async Task<bool> Update(TEntity entity)
         {
             using (var context = new TContext())

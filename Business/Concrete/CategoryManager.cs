@@ -9,11 +9,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class CategoryManager : GenericManager<Category>,ICategoryService
+    public class CategoryManager :ICategoryService
     {
         private readonly ICategoryDal _categoryDal;
 
-        public CategoryManager(ICategoryDal categoryDal) : base(categoryDal)
+        public CategoryManager(ICategoryDal categoryDal)
         {
             _categoryDal = categoryDal;
         }

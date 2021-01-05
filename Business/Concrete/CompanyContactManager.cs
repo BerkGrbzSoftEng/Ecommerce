@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class CompanyContactManager:GenericManager<CompanyContact>,ICompanyContactService
+    public class CompanyContactManager:ICompanyContactService
     {
         private ICompanyContactDal _companyContactDal;
 
-        public CompanyContactManager(ICompanyContactDal companyContactDal):base(companyContactDal)
+        public CompanyContactManager(ICompanyContactDal companyContactDal)
         {
             _companyContactDal = companyContactDal;
         }

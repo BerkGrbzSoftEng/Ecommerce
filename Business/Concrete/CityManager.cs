@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class CityManager:GenericManager<City>,ICityService
+    public class CityManager:ICityService
     {
         private ICityDal _cityDal;
 
-        public CityManager(ICityDal cityDal):base(cityDal)
+        public CityManager(ICityDal cityDal)
         {
             _cityDal = cityDal;
         }

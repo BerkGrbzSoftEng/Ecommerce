@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class AddressManager:GenericManager<Address>,IAddressService
+    public class AddressManager:IAddressService
     {
         private IAddressDal _addressDal;
 
-        public AddressManager(IAddressDal addressDal):base(addressDal)
+        public AddressManager(IAddressDal addressDal)
         {
             _addressDal = addressDal;
         }

@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class ProductMetaManager:GenericManager<ProductMeta>,IProductMetaService
+    public class ProductMetaManager:IProductMetaService
     {
         private IProductMetaDal _productMetaDal;
 
-        public ProductMetaManager(IProductMetaDal productMetaDal):base(productMetaDal)
+        public ProductMetaManager(IProductMetaDal productMetaDal)
         {
             _productMetaDal = productMetaDal;
         }

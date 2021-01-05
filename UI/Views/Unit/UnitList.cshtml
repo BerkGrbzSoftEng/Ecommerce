@@ -1,0 +1,152 @@
+﻿@model List<UI.Models.UnitModel>
+@{
+    ViewData["Title"] = "UnitList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int counter = 1;
+}
+@section heads{
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
+    <link href="~/plugins/sweetalerts/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+}
+<div class="row layout-top-spacing">
+
+    <div class="col-xl-4 col-lg-4 col-sm-4 layout-spacing ">
+        <div class="widget-content widget-content-area">
+            <form class="simple-example" action="/unit/add" method="post" novalidate="">
+                <div class="form-row">
+                    <div class="col-md-8 mb-2">
+                        <label for="birimAd">Birim Adı</label>
+                        <input type="text" class="form-control" name="UnitName" id="birimAd" value="" required="" placeholder="Birim Adı Giriniz">
+                        <div class="valid-feedback">
+                            Geçerli!
+                        </div>
+                        <div class="invalid-feedback">
+                            Geçersiz
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label for="birimKod">Birim Kodu</label>
+                        <input type="text" class="form-control" name="Code" id="birimKod" value="" required="" placeholder="Kodu Giriniz">
+                        <div class="valid-feedback">
+                            Geçerli!
+                        </div>
+                        <div class="invalid-feedback">
+                            Geçersiz
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success submit-fn mt-2 btn-sm unitSave" type="submit">Ekle</button>
+            </form>
+
+
+        </div>
+
+    </div>
+    <div class="col-xl-8 col-lg-8 col-sm-8  layout-spacing">
+        <div class="widget-content widget-content-area br-6">
+            <div class="table-responsive mb-4 mt-4">
+                <table id="html5-extension" class="table table-hover non-hover" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-center">Birim Adı</th>
+                            <th class="text-center">Birim Kodu</th>
+                            <th class="text-center">Seçenekler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@counter</td>
+                                <td class="text-center">@item.UnitName</td>
+                                <td class="text-center">@item.Code </td>
+                                <td class="text-center"><a href="javascript:void(0);" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></td>
+                            </tr>
+                            counter++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <script src="~/plugins/table/datatable/datatables.js"></script>
+    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="~/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
+    <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
+    <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+    <script>
+        $('#html5-extension').DataTable({
+            dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
+            buttons: {
+                buttons: [
+                    { extend: 'copy', className: 'btn' },
+                    { extend: 'csv', className: 'btn' },
+                    { extend: 'excel', className: 'btn' },
+                    { extend: 'print', className: 'btn' }
+                ]
+            },
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Ara...",
+                "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7
+        });
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('simple-example');
+            var invalid = $('.simple-example .invalid-feedback');
+
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        invalid.css('display', 'block');
+                    } else {
+
+                        invalid.css('display', 'none');
+                        form.classList.add('was-validated');
+
+                        swal({
+                            title: 'Lütfen Bekleyin!',
+                            text: 'Biriminiz Ekleniyor',
+                            timer: 2000,
+                            padding: '2em',
+                            onOpen: function() {
+                                swal.showLoading()
+                            }
+                        });
+
+                    }
+                }, false);
+            });
+
+        }, false);
+
+
+
+    </script>
+    <script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+    <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
+}

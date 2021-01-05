@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class DistrictManager:GenericManager<District>,IDistrictService
+    public class DistrictManager:IDistrictService
     {
         private IDistrictDal _districtDal;
 
-        public DistrictManager(IDistrictDal districtDal):base(districtDal)
+        public DistrictManager(IDistrictDal districtDal)
         {
             _districtDal = districtDal;
         }

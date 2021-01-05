@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class ProductProductImageManager:GenericManager<ProductProductImage>,IProductProductImageService
+    public class ProductProductImageManager:IProductProductImageService
     {
         private IProductProductImageDal productImageDal;
 
-        public ProductProductImageManager(IProductProductImageDal productImageDal):base(productImageDal)
+        public ProductProductImageManager(IProductProductImageDal productImageDal)
         {
             this.productImageDal = productImageDal;
         }

@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class CategoryHiearchyManager:GenericManager<CategoryHiearchy>,ICategoryHiearchyService
+    public class CategoryHiearchyManager:ICategoryHiearchyService
     {
         private ICategoryHiearchyDal _categoryHiearchyDal;
 
-        public CategoryHiearchyManager(ICategoryHiearchyDal categoryHiearchyDal):base(categoryHiearchyDal)
+        public CategoryHiearchyManager(ICategoryHiearchyDal categoryHiearchyDal)
         {
             _categoryHiearchyDal = categoryHiearchyDal;
         }

@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class MainCategoryManager:GenericManager<MainCategory>,IMainCategoryService
+    public class MainCategoryManager:IMainCategoryService
     {
         private IMainCategoryDal _mainCategoryDal;
 
-        public MainCategoryManager(IMainCategoryDal mainCategoryDal):base(mainCategoryDal)
+        public MainCategoryManager(IMainCategoryDal mainCategoryDal)
         {
             _mainCategoryDal = mainCategoryDal;
         }

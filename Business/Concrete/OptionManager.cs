@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class OptionManager:GenericManager<Option>,IOptionService
+    public class OptionManager:IOptionService
     {
         private IOptionDal _optionDal;
 
-        public OptionManager(IOptionDal optionDal):base(optionDal)
+        public OptionManager(IOptionDal optionDal)
         {
             _optionDal = optionDal;
         }

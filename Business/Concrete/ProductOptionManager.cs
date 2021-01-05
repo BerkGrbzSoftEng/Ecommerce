@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class ProductOptionManager:GenericManager<ProductOption>,IProductOptionService
+    public class ProductOptionManager:IProductOptionService
     {
         private IProductOptionDal _productOptionDal;
 
-        public ProductOptionManager(IProductOptionDal productOptionDal):base(productOptionDal)
+        public ProductOptionManager(IProductOptionDal productOptionDal)
         {
             _productOptionDal = productOptionDal;
         }

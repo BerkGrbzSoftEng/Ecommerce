@@ -13,6 +13,7 @@ namespace Core.DataAccess
         Task<List<TEntity>> GetList(Expression<Func<TEntity,bool>> filter=null);
         Task<bool> Add(TEntity entity);
         Task<bool> Delete(TEntity entity);
+        Task<bool> Delete(int Id);
         Task<bool> Update(TEntity entity);
         Task<decimal> Max(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, decimal>> column);
         Task<decimal> Min(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, decimal>> column);

@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class UserManager:GenericManager<User>,IUserService
+    public class UserManager:IUserService
     {
         private IUserDal _userDal;
 
-        public UserManager(IUserDal userDal):base(userDal)
+        public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
         }

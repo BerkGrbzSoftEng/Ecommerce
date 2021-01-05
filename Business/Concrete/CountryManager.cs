@@ -7,11 +7,11 @@ using Entities.Models;
 
 namespace Business.Concrete
 {
-    public class CountryManager:GenericManager<Country>,ICountryService
+    public class CountryManager:ICountryService
     {
         private ICountryDal _countryDal;
 
-        public CountryManager(ICountryDal countryDal):base(countryDal)
+        public CountryManager(ICountryDal countryDal)
         {
             _countryDal = countryDal;
         }

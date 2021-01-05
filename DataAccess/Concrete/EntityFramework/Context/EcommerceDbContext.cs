@@ -4,6 +4,7 @@ using System.Text;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace DataAccess.Concrete.EntityFramework.Context
 {
     public class EcommerceDbContext:DbContext

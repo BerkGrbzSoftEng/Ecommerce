@@ -15,16 +15,18 @@ namespace API.Controllers
     [ApiController]
     public class UnitController : ControllerBase
     {
-        private IUnitDal _unitDal;
+        private IUnitService _unitService;
 
-        public UnitController(IUnitDal unitDal)
+        public UnitController(IUnitService unitService)
         {
-            _unitDal = unitDal;
+            _unitService = unitService;
         }
+
+
         [HttpGet("GetListUnit")]
         public async Task<ActionResult> GetList()
         {
-            var result = await _unitDal.GetList();
+            var result = await _unitService.GetAll();
             List<UnitModel> model = new List<UnitModel>();
             if (result != null)
             {
@@ -43,67 +45,27 @@ namespace API.Controllers
             return BadRequest("No Value");
         }
 
-        [HttpGet("GetUnit")]
-        public async Task<ActionResult> Get()
+        [HttpPost("Add")]
+        public async Task<bool> AddUnit(Unit model)
         {
-            var result = await _unitDal.Get(2);
-            if (result!=null)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest("No Value");
-        }
-        [HttpGet("UnitAdd")]
-        public async Task<ActionResult> Add()
-        {
-            Unit model = new Unit();
-            model.UnitName = "Kilogram";
-            model.Code = "kg";
-
-            var result = await _unitDal.Add(model);
-            if (result)
-            {
-                return Ok("Kayit Başarılı");
-            }
-
-            return BadRequest("Kayıt Başarısız");
+            return await _unitService.Add(model);
         }
 
-        [HttpGet("UnitUpdate")]
-        public async Task<ActionResult> Update()
+        [HttpPut("Update")]
+        public async Task<bool>Update(Unit unit)
         {
-            
-            Unit model = new Unit();
-            model.ID = 1;
-            model.UnitName = "Hakkımetre";
-            model.Code = "hm";
-
-            var result = await _unitDal.Update(model);
-            if (result)
-            {
-                return Ok("Güncelleme Başarılı");
-            }
-
-            return BadRequest("Güncelleme Başarısız");
+            return await _unitService.Update(unit);
         }
 
-        [HttpGet("UnitDelete")]
-        public async Task<ActionResult> Delete()
+        [HttpDelete("Delete")]
+        public async Task<bool> Delete(Unit unit)
         {
-
-            Unit model = new Unit();
-            model.ID = 1;
-            model.UnitName = "Hakkımetre";
-            model.Code = "hm";
-
-            var result = await _unitDal.Delete(model);
-            if (result)
-            {
-                return Ok("Silme İşlemi Başarılı");
-            }
-
-            return BadRequest("Silme İşlemi Başarısız");
+            return await _unitService.Delete(unit);
+        }
+        [HttpDelete("Delete/{unitId:int}")]
+        public async Task<bool> Delete(int unitId)
+        {
+            return await _unitService.Delete(unitId);
         }
     }
 }
